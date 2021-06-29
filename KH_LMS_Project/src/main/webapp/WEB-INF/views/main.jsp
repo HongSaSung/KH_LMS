@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<a href="./loginForm.do">로그인</a>
+<h1>여기는 메인화면이다!!!!!!!!!!!!!!!!!!!</h1>
 </body>
 </html>
