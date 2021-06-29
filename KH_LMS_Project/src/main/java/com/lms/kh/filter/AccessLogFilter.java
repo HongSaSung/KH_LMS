@@ -33,6 +33,8 @@ public class AccessLogFilter implements Filter{
 		
 		String fullURL = remoteURL + "?" + queryString;
 		log.info(fullURL);
+		
+		chain.doFilter(request, response);
 	}
 
 	@Override

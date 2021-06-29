@@ -5,6 +5,10 @@
 	version="3.1">
   <display-name>KH_LMS_Project</display-name>
   
+	<welcome-file-list>
+		<welcome-file>/loginForm.do</welcome-file>
+	</welcome-file-list>
+  
   <!-- needed for ContextLoaderListener -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
