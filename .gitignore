@@ -1,10 +1,10 @@
-
-# Created by https://www.toptal.com/developers/gitignore/api/java,eclipse,dbeaver,maven
-# Edit at https://www.toptal.com/developers/gitignore?templates=java,eclipse,dbeaver,maven
-
 ### DBeaver ###
 # ide config file
+.dbeaver/
 .dbeaver-data-sources*.xml
+
+MANIFEST.MF
+pom.properties
 
 ### Eclipse ###
 .metadata
@@ -66,7 +66,8 @@ local.properties
 
 # Uncomment this line if you wish to ignore the project description file.
 # Typically, this file would be tracked if it contains build/dependency configurations:
-#.project
+.project
+.classpath
 
 ### Eclipse Patch ###
 # Spring Boot Tooling
@@ -110,4 +111,6 @@ buildNumber.properties
 # https://github.com/takari/maven-wrapper#usage-without-binary-jar
 .mvn/wrapper/maven-wrapper.jar
 
-# End of https://www.toptal.com/developers/gitignore/api/java,eclipse,dbeaver,maven
+# project custom ignore
+db.properties
+Scripts/
