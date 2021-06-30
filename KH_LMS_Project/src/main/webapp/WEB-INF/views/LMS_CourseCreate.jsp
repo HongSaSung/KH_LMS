@@ -4,11 +4,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>LMS</title>
+<title>과정개설</title>
 </head>
 <body>
-<%@include file="header.jsp" %>
-<h1>여기는 메인화면이다!!!!!!!!!!!!!!!!!!!</h1>
-<%@include file="footer.jsp" %>
+<table>
+	<tbody>
+		<tr>
+			<th></th>
+		</tr>
+	</tbody>
+</table>
 </body>
 </html>
