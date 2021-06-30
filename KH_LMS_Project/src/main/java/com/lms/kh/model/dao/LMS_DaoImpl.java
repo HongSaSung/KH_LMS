@@ -1,5 +1,7 @@
 package com.lms.kh.model.dao;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,7 +17,7 @@ public class LMS_DaoImpl implements ILMS_Dao {
 	private SqlSessionTemplate sqlSession;
 	
 	private Logger log = LoggerFactory.getLogger(this.getClass());
-	private final String NS = "com.lms.kh.model.dao.ILMS_DaoImpl.";
+	private final String NS = "com.lms.kh.model.dao.LMS_DaoImpl.";
 	
 	@Override
 	public LMS_UserDto login(LMS_UserDto userDto) {
@@ -32,7 +34,32 @@ public class LMS_DaoImpl implements ILMS_Dao {
 	
 	@Override
 	public boolean duplicateCheck(String userid) {
+		log.info("ILMS_DaoImpl LMS 아이디 중복체크 : {}", userid);
 		int d = sqlSession.selectOne(NS+"duplicateCheck", userid);
 		return (d>0)?true:false;
 	}
+
+	@Override
+	public List<LMS_UserDto> memberList() {
+		log.info("ILMS_DaoImpl LMS 회원 전체조회");
+		return sqlSession.selectList(NS+"memberList");
+	}
+
+	@Override
+	public LMS_UserDto memberDetail(String userid) {
+		log.info("ILMS_DaoImpl LMS 회원 상세조회 : {}", userid);
+		return sqlSession.selectOne(NS+"memberDetail",userid);
+	}
+
+	@Override
+	public boolean updateMember(LMS_UserDto userDto) {
+		return false;
+	}
+
+	@Override
+	public boolean deleteMember(String userid) {
+		return false;
+	}
+	
+	
 }
