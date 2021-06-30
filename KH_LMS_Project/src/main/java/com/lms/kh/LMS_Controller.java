@@ -1,5 +1,7 @@
 package com.lms.kh;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -69,6 +71,22 @@ public class LMS_Controller {
 		model.addAttribute("userid", userid);
 		model.addAttribute("isc", isc);
 		return isc?"LMS_IdDupleChk":"LMS_IdDupleChk";
+	}
+	
+	// 회원 전체조회
+	@RequestMapping(value = "/memberList.do" , method = RequestMethod.GET)
+	public String memberList(Model model) {
+		List<LMS_UserDto>memList = lms_Service.memberList();
+		model.addAttribute("memList", memList);
+		return "LMS_MemberList";
+	}
+	
+	// 회원 상세조회
+	@RequestMapping(value = "/memberDetail.do" , method = RequestMethod.GET)
+	public String memberDetail(String userid, Model model) {
+		LMS_UserDto userDto = lms_Service.memberDetail(userid);
+		model.addAttribute("userOne", userDto);
+		return "LMS_MemberDetail";
 	}
 	
 }
