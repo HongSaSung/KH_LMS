@@ -53,12 +53,15 @@ public class LMS_DaoImpl implements ILMS_Dao {
 
 	@Override
 	public boolean updateMember(LMS_UserDto userDto) {
-		return false;
+		int u = sqlSession.update(NS+"updateMember", userDto);
+		return (u>0)?true:false;
 	}
 
 	@Override
 	public boolean deleteMember(String userid) {
-		return false;
+		log.info("ILMS_ServiceImpl LMS 회원탈퇴 : {}", userid);
+		int d = sqlSession.update(NS+"deleteMember", userid);
+		return (d>0)?true:false;
 	}
 	
 	

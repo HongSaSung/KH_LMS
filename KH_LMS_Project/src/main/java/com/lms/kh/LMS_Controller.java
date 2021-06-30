@@ -1,7 +1,10 @@
 package com.lms.kh;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -11,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.lms.kh.dto.LMS_UserDto;
 import com.lms.kh.model.service.ILMS_Service;
@@ -32,11 +36,25 @@ public class LMS_Controller {
 	
 	// 로그인
 	@RequestMapping(value = "/login.do" , method = RequestMethod.POST)
-	public String lmsLogin(HttpSession session, LMS_UserDto userDto) {
+	public String lmsLogin(HttpSession session, LMS_UserDto userDto, HttpServletResponse response) {
 		log.info("LMS_Controller LMS로그인 : {}", userDto);
 		System.out.println(userDto);
 		LMS_UserDto loginDto = (LMS_UserDto)lms_Service.login(userDto);
-		session.setAttribute("lms", loginDto);
+		
+		if(loginDto == null) {
+			PrintWriter out;
+			try {
+				response.setContentType("text/html; charset=UTF-8");
+				out = response.getWriter();
+				out.println("<script>alert('가입된 정보가 없습니다.');</script>");
+				out.flush();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}			
+			return "LMS_Login";
+		}else {
+			session.setAttribute("lms", loginDto);
+		}
 		return "LMS_Main";
 	}
 	
@@ -76,6 +94,7 @@ public class LMS_Controller {
 	// 회원 전체조회
 	@RequestMapping(value = "/memberList.do" , method = RequestMethod.GET)
 	public String memberList(Model model) {
+		log.info("LMS_Controller LMS 회원 전체조회");
 		List<LMS_UserDto>memList = lms_Service.memberList();
 		model.addAttribute("memList", memList);
 		return "LMS_MemberList";
@@ -84,8 +103,53 @@ public class LMS_Controller {
 	// 회원 상세조회
 	@RequestMapping(value = "/memberDetail.do" , method = RequestMethod.GET)
 	public String memberDetail(String userid, Model model) {
+		log.info("LMS_Controller LMS 회원 상세조회 : {}", userid);
 		LMS_UserDto userDto = lms_Service.memberDetail(userid);
 		model.addAttribute("userOne", userDto);
+		return "LMS_MemberDetail";
+	}
+	
+	// 회원 정보수정 페이지 이동
+	@RequestMapping(value = "/updateForm.do" , method = RequestMethod.POST)
+	public String updateForm(String userid, Model model) {
+		log.info("LMS_Controller LMS 회원 상세조회 : {}", userid);
+		LMS_UserDto userDto = lms_Service.memberDetail(userid);
+		model.addAttribute("userOne", userDto);
+		return "LMS_MemberModify";
+	}
+	
+	// 회원 정보수정
+	@RequestMapping(value = "/updateMember.do" , method = RequestMethod.GET)
+	public String updateMember(LMS_UserDto userDto, Model model) {
+		boolean isc = lms_Service.updateMember(userDto);
+		model.addAttribute("memMofiy", isc);
+		return isc?"LMS_MemberDetail":"LMS_MemberModify";
+	}
+	
+	// 회원정보 수정시 비밀번호 인증
+	@RequestMapping(value = "/passOk.do" , method = RequestMethod.GET)
+	@ResponseBody
+	public String passOk(String id, String pw, HttpSession session) {
+		
+		log.info("[LMS_Controller] 패스워드 인증 : {}", id+"/"+pw);
+		LMS_UserDto dto = new LMS_UserDto();
+		dto.setUserid(id);
+		dto.setPassword(pw);
+		if(lms_Service.login(dto) != null) {
+			return "true";
+		}else {
+			return "false";
+		}
+	}
+	
+	// 회원탈퇴
+	@RequestMapping(value = "/deleteMember.do" , method = RequestMethod.GET)
+	public String deleteMember(String userid, HttpSession session) {
+		boolean isc = lms_Service.deleteMember(userid);
+		if(isc) {
+			session.invalidate();
+			return "LMS_Login"; 
+		}
 		return "LMS_MemberDetail";
 	}
 	
