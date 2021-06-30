@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>회원가입</title>
 <script type="text/javascript" src="./js/LMS_SignUp.js"></script>
 </head>
 <body>

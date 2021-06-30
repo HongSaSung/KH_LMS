@@ -14,7 +14,7 @@
 	<nav class="navbar navbar-inverse">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="#">LMS</a>
+				<a class="navbar-brand" href="./login.do">LMS</a>
 			</div>
 			<ul class="nav navbar-nav">
 				<li class="active"><a href="#">Home</a></li>
@@ -28,10 +28,10 @@
 					<span>${sessionScope.name} 님 환영합니다! [sessionScope.auth]</span>
 				</li>
 <%-- 				<c:if test="${sessionScope.auth eq 'A'}"> --%>
-					<li><a href="#"><span class="glyphicon glyphicon-user"></span>MemberList</a></li>
+					<li><a href="./memberList.do"><span class="glyphicon glyphicon-user"></span>MemberList</a></li>
 <%-- 				</c:if> --%>
 <%-- 				<c:if test="${sessionScope.auth eq 'U'}"> --%>
-					<li><a href="#"><span class="glyphicon glyphicon-user"></span>MyPage</a></li>
+					<li><a href="./myPage.do"><span class="glyphicon glyphicon-user"></span>MyPage</a></li>
 <%-- 				</c:if> --%>
 				<li><a href="./logout.do"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
 			</ul>
