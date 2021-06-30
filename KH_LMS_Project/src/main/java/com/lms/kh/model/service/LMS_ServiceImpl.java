@@ -50,12 +50,14 @@ public class LMS_ServiceImpl implements ILMS_Service {
 
 	@Override
 	public boolean updateMember(LMS_UserDto userDto) {
-		return false;
+		log.info("ILMS_ServiceImpl LMS 회원 정보수정 : {}", userDto);
+		return lms_Dao.updateMember(userDto);
 	}
 
 	@Override
 	public boolean deleteMember(String userid) {
-		return false;
+		log.info("ILMS_ServiceImpl LMS 회원탈퇴 : {}", userid);
+		return lms_Dao.deleteMember(userid);
 	}
 	
 	

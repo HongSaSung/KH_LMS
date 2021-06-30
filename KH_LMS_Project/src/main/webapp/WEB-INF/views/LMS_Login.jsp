@@ -9,10 +9,12 @@
 	function loginCheck() {
 		var userid = document.getElementById("userid").value;
 		var pw = document.getElementById("password").value;
-		if(user == "") {
+		if(userid == "") {
 			alert("아이디를 입력해주세요.");
-		}else if(password == "") {
+		}else if(pw == "") {
 			alert("비밀번호를 입력해주세요.");
+		} else {
+			document.login.submit();
 		}
 	}
 	
@@ -20,10 +22,10 @@
 </head>
 <body>
 <div>
-	<form action="./login.do" method="post" onsubmit="return loginCheck()">
+	<form action="./login.do" name="login" method="post" >
 		<input type="text" id="userid" name="userid">
 		<input type="password" id="password" name="password">
-		<input type="submit" value="LOGIN">
+		<input type="button" value="LOGIN" onclick="loginCheck()">
 		<input type="button" value="회원가입" onclick="javascript:location.href='./signupForm.do'">
 	</form>
 </div>
