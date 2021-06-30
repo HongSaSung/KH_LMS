@@ -16,9 +16,37 @@
 	VALUES (#{name}, #{userid}, #{password}, #{email}, #{address}, #{phone}, 'N', 'U', SYSDATE)
   </insert>
   
+  <!--아이디 중복 검사 -->
   <select id="duplicateCheck" parameterType="java.lang.String" resultType="java.lang.Integer">
   	SELECT count(USERID)
         FROM LMSUSER l 
         WHERE USERID = #{userid}
   </select>
+  
+  <!-- 회원 전체리스트 조회 -->
+  <select id="memberList" resultType="lms_Dto">
+	 SELECT NAME, USERID, EMAIL, ADDRESS, PHONE, DELFLAG, AUTH, REGDATE
+	       FROM LMSUSER
+	       WHERE DELFLAG = 'N'
+  </select>
+  
+  <!-- 회원 상세조회 -->
+  <select id="memberDetail" parameterType="java.lang.String" resultType="lms_Dto">
+  	SELECT NAME, USERID, EMAIL, ADDRESS, PHONE, REGDATE
+        FROM LMSUSER
+        WHERE USERID = #{userid}
+  </select>
+  
+  <!-- 회원탈퇴 -->
+  <update id="deleteMember" parameterType="java.lang.String">
+  	UPDATE LMSUSER SET DELFLAG = 'Y'
+		WHERE USERID = #{userid}
+  </update>
+  
+  <!-- 회원정보수정 -->
+  <update id="updateMember" parameterType="lms_Dto">
+  	UPDATE LMSUSER SET EMAIL = #{email}, ADDRESS = #{address}, PHONE = #{phone}
+		WHERE USERID = #{userid}
+  </update>
+  
 </mapper>
