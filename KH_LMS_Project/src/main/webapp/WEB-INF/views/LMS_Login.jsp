@@ -24,6 +24,7 @@
 		<input type="text" id="userid" name="userid">
 		<input type="password" id="password" name="password">
 		<input type="submit" value="LOGIN">
+		<input type="button" value="회원가입" onclick="javascript:location.href='./signupForm.do'">
 	</form>
 </div>
 </body>

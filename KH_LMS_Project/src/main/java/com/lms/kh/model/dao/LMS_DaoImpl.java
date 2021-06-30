@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.lms.kh.dto.LMS_UserDto;
 
 @Repository
-public class ILMS_DaoImpl implements ILMS_Dao {
+public class LMS_DaoImpl implements ILMS_Dao {
 
 	@Autowired
 	private SqlSessionTemplate sqlSession;
@@ -18,8 +18,21 @@ public class ILMS_DaoImpl implements ILMS_Dao {
 	private final String NS = "com.lms.kh.model.dao.ILMS_DaoImpl.";
 	
 	@Override
-	public LMS_UserDto lmsLogin(LMS_UserDto lms_Dto) {
+	public LMS_UserDto login(LMS_UserDto userDto) {
 		log.info("ILMS_DaoImpl LMS 로그인");
-		return sqlSession.selectOne(NS+"lmsLogin", lms_Dto);
+		return sqlSession.selectOne(NS+"login", userDto);
+	}
+	
+	@Override
+	public boolean signUp(LMS_UserDto userDto) {
+		log.info("ILMS_DaoImpl LMS 회원가입 : {}", userDto);
+		int n = sqlSession.insert(NS+"signUp", userDto);
+		return (n>0)?true:false;
+	}
+	
+	@Override
+	public boolean duplicateCheck(String userid) {
+		int d = sqlSession.selectOne(NS+"duplicateCheck", userid);
+		return (d>0)?true:false;
 	}
 }

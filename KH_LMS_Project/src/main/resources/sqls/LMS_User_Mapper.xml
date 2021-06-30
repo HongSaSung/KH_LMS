@@ -1,9 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.lms.kh.model.dao.ILMS_DaoImpl">
-  <select id="lmsLogin" parameterType="lms_Dto" resultType="lms_Dto">
+	
+	<!-- 로그인 -->
+  <select id="login" parameterType="lms_Dto" resultType="lms_Dto">
   	SELECT NAME, USERID, AUTH
 		FROM LMSUSER l 
 		WHERE USERID =#{userid} AND PASSWORD =#{password} AND DELFLAG = 'N'
+  </select>
+  
+  <!-- 회원가입 -->
+  <insert id="signUp" parameterType="lms_Dto">
+  	INSERT INTO LMSUSER 
+  	(NAME, USERID, PASSWORD, EMAIL, ADDRESS, PHONE, DELFLAG, AUTH, REGDATE)
+	VALUES (#{name}, #{userid}, #{password}, #{email}, #{address}, #{phone}, 'N', 'U', SYSDATE)
+  </insert>
+  
+  <select id="duplicateCheck" parameterType="java.lang.String" resultType="java.lang.Integer">
+  	SELECT count(USERID)
+        FROM LMSUSER l 
+        WHERE USERID = #{userid}
   </select>
 </mapper>
