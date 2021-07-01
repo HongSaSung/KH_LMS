@@ -25,7 +25,7 @@
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li>
-					<span>${sessionScope.name} 님 환영합니다! [sessionScope.auth]</span>
+					<span>${sessionScope.lms.name} 님 환영합니다! ${sessionScope.lms.auth}</span>
 				</li>
 <%-- 				<c:if test="${sessionScope.auth eq 'A'}"> --%>
 					<li><a href="./memberList.do"><span class="glyphicon glyphicon-user"></span>MemberList</a></li>

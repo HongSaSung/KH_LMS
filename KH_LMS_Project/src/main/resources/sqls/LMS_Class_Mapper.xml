@@ -10,15 +10,20 @@
 	</insert>
 	
 	<!-- 과정 전체 조회 -->
-	<select id="classList" parameterType="class_Dto">
+	<select id="classList" resultType="class_Dto">
 		SELECT CL_SEQ, CL_TITLE
 			FROM CLASS
 	</select>
 	
 	<!-- 과정 상세조회 -->
 	<select id="classDetail" parameterType="java.lang.Integer" resultType="class_Dto">
-		SELECT CL_TITLE, CL_DESC
+		SELECT CL_SEQ, CL_TITLE, CL_DESC
 			FROM CLASS
 			WHERE CL_SEQ = #{seq}
 	</select>
+	
+	<update id="classModify" parameterType="class_Dto">
+		UPDATE CLASS SET CL_DESC = #{cl_desc}
+		WHERE CL_SEQ = #{cl_seq}
+	</update>
 </mapper>
