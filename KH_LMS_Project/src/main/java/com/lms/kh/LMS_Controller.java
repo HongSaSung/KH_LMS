@@ -110,8 +110,9 @@ public class LMS_Controller {
 	}
 	
 	// 회원 정보수정 페이지 이동
-	@RequestMapping(value = "/updateForm.do" , method = RequestMethod.POST)
-	public String updateForm(String userid, Model model) {
+	@RequestMapping(value = "/updateForm.do" , method = RequestMethod.GET)
+	public String updateForm(Model model, HttpSession session) {
+		String userid = ((LMS_UserDto)session.getAttribute("lms")).getUserid();
 		log.info("LMS_Controller LMS 회원 상세조회 : {}", userid);
 		LMS_UserDto userDto = lms_Service.memberDetail(userid);
 		model.addAttribute("userOne", userDto);
@@ -119,18 +120,21 @@ public class LMS_Controller {
 	}
 	
 	// 회원 정보수정
-	@RequestMapping(value = "/updateMember.do" , method = RequestMethod.GET)
-	public String updateMember(LMS_UserDto userDto, Model model) {
+	@RequestMapping(value = "/updateMember.do" , method = RequestMethod.POST)
+	public String updateMember(LMS_UserDto userDto, Model model, HttpSession session) {
+		String userid = ((LMS_UserDto)session.getAttribute("lms")).getUserid();
+		userDto.setUserid(userid);
 		boolean isc = lms_Service.updateMember(userDto);
 		model.addAttribute("memMofiy", isc);
-		return isc?"LMS_MemberDetail":"LMS_MemberModify";
+		model.addAttribute("userid", userid);
+		return isc?"redirect:/memberDetail.do?userid="+userid:"redirect:/updateForm.do";
 	}
 	
 	// 회원정보 수정시 비밀번호 인증
 	@RequestMapping(value = "/passOk.do" , method = RequestMethod.GET)
 	@ResponseBody
-	public String passOk(String id, String pw, HttpSession session) {
-		
+	public String passOk(String pw, HttpSession session) {
+		String id = ((LMS_UserDto)session.getAttribute("lms")).getUserid();	
 		log.info("[LMS_Controller] 패스워드 인증 : {}", id+"/"+pw);
 		LMS_UserDto dto = new LMS_UserDto();
 		dto.setUserid(id);
@@ -144,7 +148,8 @@ public class LMS_Controller {
 	
 	// 회원탈퇴
 	@RequestMapping(value = "/deleteMember.do" , method = RequestMethod.GET)
-	public String deleteMember(String userid, HttpSession session) {
+	public String deleteMember(HttpSession session) {
+		String userid = ((LMS_UserDto)session.getAttribute("lms")).getUserid();
 		boolean isc = lms_Service.deleteMember(userid);
 		if(isc) {
 			session.invalidate();

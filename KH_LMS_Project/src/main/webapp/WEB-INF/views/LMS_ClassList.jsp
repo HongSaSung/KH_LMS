@@ -19,12 +19,14 @@
 		</tr>
 	</thead>
 	<tbody>
+	<c:forEach var="cl" items="${clList}" varStatus="vs">
 		<tr>
-			<td></td>
-			<td></td>
+			<td>${cl.cl_seq}</td>
+			<td><a href="./classDetail.do?cl_seq=${cl.cl_seq}">${cl.cl_title}</a></td>
 <!-- 			<td></td> -->
 <!-- 			<td></td> -->
 		</tr>
+	</c:forEach>
 	</tbody>
 	<tfoot>
 		<tr>

@@ -7,16 +7,11 @@
 <title>회원 상세조회</title>
 <script type="text/javascript">
 	function userDel() {
-		var id = document.getElementById("userid").value;
 		confirm("정말 탈퇴하시겠습니까?");
-		location.href="./deleteMember.do?userid="+id;
+		location.href="./deleteMember.do";
 	}
 	function modifyUser() {
 		console.log("비밀번호확인");
-		var id = document.getElementById("userid").value;
-		console.log(id);
-		var frm = document.form;
-		console.log(frm);
 		var pw = prompt("비밀번호를 입력해주세요.");
 		if(pw == null) {
 			return;
@@ -26,11 +21,11 @@
 			method : "get",
 			async : false,
 			dataType : "text",
-			data : {"id":id, "pw":pw},
+			data : {"pw":pw},
 			success : function (msg) {
 				console.log(msg);
 				if(msg == 'true'){
-					frm.submit();
+					location.href="./updateForm.do";
 				} else {
 					alert("비밀번호가 틀립니다.");
 					return;
@@ -48,8 +43,6 @@
 <body>
 <%@include file="header.jsp" %>
 <span onclick="userDel()" id="del">회원탈퇴</span>
-<form action="./updateForm.do"  name="form" method="post">
-	<input type="hidden" id="userid" name="userid" value="${userOne.userid}">
 	<table class="table table-hover">
 		<tbody>
 			<tr>
@@ -85,6 +78,5 @@
 			</tr>
 		</tfoot>
 	</table>
-</form>
 </body>
 </html>
