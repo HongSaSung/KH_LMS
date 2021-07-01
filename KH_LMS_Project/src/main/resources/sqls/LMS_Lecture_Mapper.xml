@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lms.kh.model.dao.Lecture_DaoImpl">
+
+	<!-- 강의 전체조회 -->
+	<select id="lectureList" resultType="lecture_Dto">
+		SELECT LE_SEQ, LE_TITLE, LE_TERM, LE_START, LE_END
+			FROM LECTURE
+	</select>
+	
+	<!-- 강의별 상세조회 -->
+	<select id="lectureDetail" parameterType="java.lang.Integer" resultType="lecture_dto">
+		SELECT LE_SEQ, LE_TITLE, LE_TERM, LE_START, LE_END, LE_CONTENT
+			FROM LECTURE
+			WHERE LE_SEQ = #{seq}
+	</select>
+	
+	<!-- 강의 등록 -->
+	<insert id="insertLecture" parameterType="lecture_dto">
+		INSERT INTO LECTURE (LE_SEQ, LE_TITLE, LE_TERM, LE_START, LE_END, LE_CONTENT)
+			VALUES (LECTURE_SEQ.NEXTVAL, #{le_title}, #{le_term}, #{le_start}, #{le_end}, #{le_content})
+	</insert>
+	
+	<!-- 강의 상세내용 수정 -->
+	<update id="updateLecture" parameterType="java.util.Map">
+		UPDATE LECTURE SET LE_CONTENT = #{le_content}
+        WHERE LE_SEQ = #{seq}
+	</update>
+	
+	<!-- 강사 등록 -->
+	<!--  -->
+	<insert id="appendTeacher" parameterType="java.util.Map">
+		INSERT INTO LT_LINK (LT_LINK_SEQ, LE_SEQ, TE_SEQ)
+			VALUES (LT_LINK_SEQ.NEXTVAL, #{le_seq}, #{te_seq})
+	
+	</insert>
+	
+</mapper>
