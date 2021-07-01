@@ -28,11 +28,16 @@
 	</update>
 	
 	<!-- 강사 등록 -->
-	<!--  -->
-	<insert id="appendTeacher" parameterType="java.util.Map">
+	<insert id="attachTeacher" parameterType="java.util.Map">
 		INSERT INTO LT_LINK (LT_LINK_SEQ, LE_SEQ, TE_SEQ)
 			VALUES (LT_LINK_SEQ.NEXTVAL, #{le_seq}, #{te_seq})
-	
 	</insert>
+	
+	<!-- 과정과 연관된 강의 조회 -->
+	<select id="lectureGroupList" parameterType="java.lang.Integer" resultType="lecture_dto">
+		SELECT LE_TITLE
+        FROM LECTURE JOIN CL_LINK USING(LE_SEQ)
+                WHERE CL_SEQ = #{seq}
+	</select>
 	
 </mapper>
