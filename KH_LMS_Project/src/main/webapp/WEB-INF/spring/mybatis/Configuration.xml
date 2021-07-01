@@ -5,10 +5,12 @@
 	<typeAliases>
 		<typeAlias type="com.lms.kh.dto.LMS_UserDto" alias="lms_Dto"/>
 		<typeAlias type="com.lms.kh.dto.TeacherDto" alias="teacher_Dto"/>
+		<typeAlias type="com.lms.kh.dto.ClassDto.java" alias="class_Dto"/>
 	</typeAliases>
 	
 	<mappers>
 		<mapper resource="/sqls/LMS_User_Mapper.xml"/>
 		<mapper resource="/sqls/LMS_Teacher_Mapper.xml"/>
+		<mapper resource="/sqls/LMS_Class_Mapper.xml"/>
 	</mappers>
 </configuration>
