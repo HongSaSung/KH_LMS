@@ -11,4 +11,4 @@ LMS System
 김송주 : DB 구축 및 쿼리테스트, 매퍼 작성
 
 
-홍사성 : Spring 환경 구축, 화면 작성, Dao/Service 작성
+홍사성 : Spring 환경 구축, jsp 및 Servlet Controller 작성, Dao/Service 작성
