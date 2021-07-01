@@ -2,6 +2,17 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.lms.kh.model.dao.Teacher_DaoImpl">
 
+	<resultMap type="teacher_Dto" id="teacher_UserMap">
+		<result column="TE_SEQ" property="te_seq"/>
+		<result column="USERID" property="userid"/>
+		<collection property="lms_Dto" resultMap="uDtoMAP"/>
+	</resultMap>
+	
+	<resultMap type="lms_Dto" id="uDtoMap">
+		<result column="NAME" property="name"/>
+	</resultMap>
+
+
 	<!-- 선택한 회원을 강사로 등록할 수 있다  -->
 	<insert id="registTeacher" parameterType="java.lang.String">
 		INSERT INTO TEACHER (TE_SEQ, USERID, REGDATE)
@@ -9,10 +20,8 @@
 	</insert>
 	
 	<!-- 등록된 강사를 전체조회할 수 있다. -->
-	<select id="teacherList" resultType="teacher_Dto">
-		SELECT TE_SEQ, USERID, l.NAME, l3.LE_TITLE 
-			FROM TEACHER t JOIN LMSUSER l USING(USERID)
-				LEFT JOIN LT_LINK l2 USING(TE_SEQ)
-				LEFT JOIN LECTURE l3 USING(LE_SEQ)
+	<select id="teacherList" resultMap="teacher_UserMap">
+		SELECT TE_SEQ, USERID, NAME
+      	  FROM TEACHER t JOIN LMSUSER l USING(USERID)
 	</select>
 </mapper>
