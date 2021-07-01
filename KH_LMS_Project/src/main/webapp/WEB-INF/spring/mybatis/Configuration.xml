@@ -5,7 +5,7 @@
 	<typeAliases>
 		<typeAlias type="com.lms.kh.dto.LMS_UserDto" alias="lms_Dto"/>
 		<typeAlias type="com.lms.kh.dto.TeacherDto" alias="teacher_Dto"/>
-		<typeAlias type="com.lms.kh.dto.ClassDto.java" alias="class_Dto"/>
+		<typeAlias type="com.lms.kh.dto.ClassDto" alias="class_Dto"/>
 		<typeAlias type="com.lms.kh.dto.LectureDto.java" alias="lecture_Dto"/>
 	</typeAliases>
 	

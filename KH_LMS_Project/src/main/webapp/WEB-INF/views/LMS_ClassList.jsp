@@ -14,20 +14,25 @@
 		<tr>
 			<th>과정번호</th>
 			<th>과정명</th>
-			<th>시작일</th>
-			<th>종료일</th>
-			<th>등록일</th>
+<!-- 			<th>시작일</th> -->
+<!-- 			<th>종료일</th> -->
 		</tr>
 	</thead>
 	<tbody>
 		<tr>
 			<td></td>
 			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
+<!-- 			<td></td> -->
+<!-- 			<td></td> -->
 		</tr>
 	</tbody>
+	<tfoot>
+		<tr>
+			<td>
+				<input type="button" value="과정개설" onclick="javascript:location.href='./classInsert.do'">
+			</td>
+		</tr>
+	</tfoot>
 </table>
 </body>
 </html>
