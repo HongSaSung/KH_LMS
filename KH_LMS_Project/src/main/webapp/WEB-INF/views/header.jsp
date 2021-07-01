@@ -14,11 +14,11 @@
 	<nav class="navbar navbar-inverse">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="./login.do">LMS</a>
+				<a class="navbar-brand" href="./LMS_Main.jsp">LMS</a>n
 			</div>
 			<ul class="nav navbar-nav">
 				<li class="active"><a href="#">Home</a></li>
-				<li><a href="#">과정</a></li>
+				<li><a href="./classMove.do">과정</a></li>
 				<li><a href="#">강의</a></li>
 				<li><a href="#">학원공지</a></li>
 				<li><a href="#">출결</a></li>
