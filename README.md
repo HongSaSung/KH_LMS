@@ -12,3 +12,6 @@ LMS System
 
 
 홍사성 : Spring 환경 구축, jsp 및 Servlet Controller 작성, Dao/Service 작성
+
+발표 관련 파일 URL
+https://drive.google.com/drive/folders/1w2rVOucb89eSP2pBFb6qXqu4ygv4mh29?usp=sharing
