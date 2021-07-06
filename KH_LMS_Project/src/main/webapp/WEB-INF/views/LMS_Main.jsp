@@ -8,7 +8,6 @@
 </head>
 <body>
 <%@include file="header.jsp" %>
-<h1>여기는 메인화면이다!!!!!!!!!!!!!!!!!!!</h1>
 <%@include file="footer.jsp" %>
 </body>
 </html>
